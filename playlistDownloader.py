@@ -1,4 +1,4 @@
-ts=input("Troubleshoot? (y/n): ")
+ts=input("Troubleshoot? (y/N): ")
 import os
 if ts.lower()[0] == 'y':
     if os.name == 'nt':
