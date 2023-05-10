@@ -1,6 +1,6 @@
 ts=input("Troubleshoot? (y/n): ")
+import os
 if ts.lower()[0] == 'y':
-    import os
     if os.name == 'nt':
         os.system('python -m pip install -U pip')
         os.system('python -m pip install -U pytube')
