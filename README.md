@@ -1,6 +1,9 @@
-# YouTube-Playlist-Downloader<hr>
-Download your any YouTube playlist with a single URL.
-<hr>
+# Youtube Playlist Downloader
+
+* Created a python script for downloading a complete youtube playlist to your local pc
+
+---
+
 ### Requirements
 
 * python 3.5 or above
@@ -9,27 +12,24 @@ Download your any YouTube playlist with a single URL.
   * termcolor
   * pytube
   * requests
-<hr>
+
+  ---
+
 ### Usage
 
 * Windows
 
   ```
-  $ python playlistDownloader.py [folderName] [-r 360p|720p] [-h/--help]
+  $ python playlistDownloader.py
   ```
 * Linux
 
   ```
-  $ python3 playlistDownloader.py [folderName] [-r 360p|720p] [-h/--help]
+  $ python3 playlistDownloader.py
   ```
 
-
-folderName: name of the folder where you want to save your video by default it will be the first 5 characters of the playlist title or the playlist id
-
-Options:
-
-    -h/--help: to show this help message
-
-    -r: resolution of the video you want to download by default it will be 720p setable options are 360p and 720p
-
 ---
+
+### Note:
+
+    For the first time do run the troubleshoot to install coresponding packages.
