@@ -1,78 +1,40 @@
-try:
-    import os
-    from pytube import YouTube
-    import requests
-    import re
-    import sys
-    import termcolor
-except:
+ts=input("Troubleshoot? (y/n): ")
+if ts.lower()[0] == 'y':
     import os
     if os.name == 'nt':
-        os.system('python -m pip install pytube')
-        os.system('python -m pip install termcolor')
-        os.system('python -m pip install requests')
+        os.system('python -m pip install -U pip')
+        os.system('python -m pip install -U pytube')
+        os.system('python -m pip install -U termcolor')
+        os.system('python -m pip install -U requests')
         os.system('cls')
     else:
-        os.system('python3 -m pip install pytube')
-        os.system('python3 -m pip install termcolor')
-        os.system('python3 -m pip install requests')
+        os.system('python3 -m pip install -U pip')
+        os.system('python3 -m pip install -U pytube')
+        os.system('python3 -m pip install -U termcolor')
+        os.system('python3 -m pip install -U requests')
         os.system('clear')
-    from pytube import YouTube
-    import requests
-    import re
-    import sys
-    import termcolor
-
-def help():
-    if os.name == 'nt':
-        print('''
-usage: python playlistDownloader.py [folderName] [-r 360p/720p] [-h/--help]
-
-folder name: name of the folder where you want to save your videos
-             by default it will be the first 5 characters of the 
-             playlist title or the playlist id
-        
-Options:
-    -h/--help: to show this help message
-    -r: resolution of the video you want to download
-        by default it will be 720p
-        setable options are 360p and 720p
-
-        ''')
-    else:
-        print('''
-usage: python3 playlistDownloader.py [folder name] [-r 360p/720p] [-h/--help]
-folder name: name of the folder where you want to save your videos
-             by default it will be the first 5 characters of the 
-             playlist title or the playlist id
-        
-Options:
-    -h/--help: to show this help message
-    -r: resolution of the video you want to download
-        by default it will be 720p
-        setable options are 360p and 720p
-
-        ''')
-#------------------------------------------------------------------------------
-# Main
+from pytube import YouTube
+import requests
+import re
+import sys
+import termcolor
+def folderName(name:str):
+    r = ''
+    for i in name:
+        if i.isalnum():
+            r += i
+        elif i == ' ':
+            r += '_'
+    return r
 url=''
 user_res=''
-if (len(sys.argv)  > 1 ):
-    if sys.argv[1] == '-h' or sys.argv[1] == '--help':
-        help()
-        sys.exit()
-    if '-r' in sys.argv:
-        user_res = sys.argv[sys.argv.index('-r') + 1]
-        if user_res != '360p' and user_res != '720p':
-            print(termcolor.colored('[-]', 'red'),'Incorrect Resolution.')
-            sys.exit()
-
 BASE_DIR = os.getcwd()
 print('WELCOME TO PLAYLIST DOWNLOADER')
 url = str(input("\nPlaylist url: "))
 if url == '':
     print(termcolor.colored('[-]', 'red'),'URL cannot be empty!')
     sys.exit()
+user_res = str(input("Resolution (720p/360p)(default:720p): "))
 if user_res == '':user_res = "720p"
 our_links = []
 try:req = requests.get(url)
@@ -93,11 +55,13 @@ for m in mat:
     b = 'https://youtube.com/' + a
     if b not in our_links:our_links.append(b)
 if our_links == False:sys.exit()
+print(termcolor.colored('[+]', 'green'), 'Playlist Link Detected')
+f_name = str(input("Folder name: "))
+if f_name == '':
+    print(termcolor.colored('[-]', 'red'),'Folder name cannot be empty!')
+    sys.exit()
+f_name = folderName(f_name)
 os.chdir(BASE_DIR)
-if (len(sys.argv) < 2):
-    f_name = f
-    f_name = f_name[:5]
-else:f_name = sys.argv[1]
 try:os.mkdir(f_name)
 except:print(termcolor.colored('[-]', 'yellow'), 'Folder already exists')
 os.chdir(f_name)
